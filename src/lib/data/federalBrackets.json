@@ -1,0 +1,75 @@
+{
+  "taxYear": 2026,
+  "lastVerified": "2026-08-26",
+  "source": "IRS Revenue Procedure 2025-32; SSA Contribution and Benefit Base Announcement (2026)",
+  "incomeTax": {
+    "single": [
+      { "rate": 0.10, "min": 0 },
+      { "rate": 0.12, "min": 12400 },
+      { "rate": 0.22, "min": 50400 },
+      { "rate": 0.24, "min": 105700 },
+      { "rate": 0.32, "min": 201775 },
+      { "rate": 0.35, "min": 256225 },
+      { "rate": 0.37, "min": 640600 }
+    ],
+    "marriedJoint": [
+      { "rate": 0.10, "min": 0 },
+      { "rate": 0.12, "min": 24800 },
+      { "rate": 0.22, "min": 100800 },
+      { "rate": 0.24, "min": 211400 },
+      { "rate": 0.32, "min": 403550 },
+      { "rate": 0.35, "min": 512450 },
+      { "rate": 0.37, "min": 768700 }
+    ],
+    "marriedSeparate": [
+      { "rate": 0.10, "min": 0 },
+      { "rate": 0.12, "min": 12400 },
+      { "rate": 0.22, "min": 50400 },
+      { "rate": 0.24, "min": 105700 },
+      { "rate": 0.32, "min": 201775 },
+      { "rate": 0.35, "min": 256225 },
+      { "rate": 0.37, "min": 384350 }
+    ],
+    "headOfHousehold": [
+      { "rate": 0.10, "min": 0 },
+      { "rate": 0.12, "min": 17700 },
+      { "rate": 0.22, "min": 67450 },
+      { "rate": 0.24, "min": 105700 },
+      { "rate": 0.32, "min": 201775 },
+      { "rate": 0.35, "min": 256200 },
+      { "rate": 0.37, "min": 640600 }
+    ]
+  },
+  "standardDeduction": {
+    "single": 16100,
+    "marriedJoint": 32200,
+    "marriedSeparate": 16100,
+    "headOfHousehold": 24150
+  },
+  "fica": {
+    "socialSecurity": {
+      "rate": 0.062,
+      "wageBase": 184500,
+      "maxEmployeeContribution": 11439.00
+    },
+    "medicare": {
+      "rate": 0.0145,
+      "wageBase": null,
+      "additionalMedicare": {
+        "rate": 0.009,
+        "thresholds": {
+          "single": 200000,
+          "marriedJoint": 250000,
+          "marriedSeparate": 125000,
+          "headOfHousehold": 200000
+        }
+      }
+    }
+  },
+  "notes": [
+    "2026 brackets and standard deductions reflect the OBBBA-adjusted, inflation-indexed figures per IRS Rev. Proc. 2025-32.",
+    "Federal withholding in payroll engines normally uses IRS Publication 15-T percentage method tables (which annualize wages differently from the year-end tax brackets shown here). This engine approximates annualized effective withholding by applying marginal brackets to annualized taxable wages, then dividing by pay periods — sufficient for an estimator tool, not for exact employer withholding compliance.",
+    "Additional Medicare Tax (0.9%) is withheld by employers once an individual employee's wages exceed $200,000 in a calendar year, regardless of filing status — the threshold column above reflects the year-end return threshold, but calculator.ts applies the $200,000 single-employer withholding rule as is standard payroll practice.",
+    "Social Security wage base for 2026 is $184,500 (up from $176,100 in 2025), yielding a max employee contribution of $11,439.00."
+  ]
+}

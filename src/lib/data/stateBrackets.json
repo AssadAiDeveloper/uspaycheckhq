@@ -1,0 +1,416 @@
+{
+  "taxYear": 2026,
+  "lastVerified": "2026-08-26",
+  "source": "Tax Foundation, 'State Individual Income Tax Rates and Brackets, 2026' (Feb. 19, 2026); state DOR notices for special payroll taxes (SDI/PFL/FAMLI/WA Cares).",
+  "generalNotes": [
+    "Bracket 'min' values are the income level at which that marginal rate begins; brackets are applied progressively.",
+    "Head-of-household brackets are not separately published by most states in the Tax Foundation dataset; where a state does not define its own HoH schedule, the 'single' schedule is used as a standard industry approximation. This is flagged per-state via 'hohUsesSingleBrackets'.",
+    "'exemptionType': 'deduction' amounts reduce taxable income; 'credit' amounts reduce tax liability dollar-for-dollar (modeled in state.ts accordingly).",
+    "specialPayrollTax entries represent additional employee-side payroll withholdings (SDI / PFL / FAMLI / long-term-care) that are NOT part of the state income tax but materially affect net pay. Entries marked 'verified: false' use the most recent confirmed rate available and should be reviewed each January when states publish new figures.",
+    "Local/county income taxes (e.g., in MD, NY-NYC/Yonkers, OH, PA, IN, IA, KY) are out of scope for Phase 1 and are handled by a future localTax.ts module."
+  ],
+  "states": {
+    "AL": { "name": "Alabama", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.02, "min": 0 }, { "rate": 0.04, "min": 500 }, { "rate": 0.05, "min": 3000 }],
+        "marriedJoint": [{ "rate": 0.02, "min": 0 }, { "rate": 0.04, "min": 1000 }, { "rate": 0.05, "min": 6000 }]
+      },
+      "standardDeduction": { "single": 3000, "marriedJoint": 8500, "exemptionType": "deduction" },
+      "personalExemption": { "single": 1500, "marriedJoint": 3000, "dependent": 1000, "exemptionType": "deduction" },
+      "notes": "Standard deduction phases down as AGI rises; base amount shown."
+    },
+    "AK": { "name": "Alaska", "hasIncomeTax": false, "type": "none" },
+    "AZ": { "name": "Arizona", "hasIncomeTax": true, "type": "flat", "flatRate": 0.025,
+      "standardDeduction": { "single": 8350, "marriedJoint": 16700, "headOfHousehold": 8350, "exemptionType": "deduction" },
+      "personalExemption": { "dependentCreditUnder17": 100, "dependentCredit17Plus": 25, "exemptionType": "credit" }
+    },
+    "AR": { "name": "Arkansas", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.02, "min": 0 }, { "rate": 0.039, "min": 4600 }],
+        "marriedJoint": [{ "rate": 0.02, "min": 0 }, { "rate": 0.039, "min": 4600 }]
+      },
+      "standardDeduction": { "single": 2470, "marriedJoint": 4940, "exemptionType": "deduction" },
+      "personalExemption": { "single": 29, "marriedJoint": 58, "dependent": 29, "exemptionType": "credit" }
+    },
+    "CA": { "name": "California", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [
+          { "rate": 0.01, "min": 0 }, { "rate": 0.02, "min": 11079 }, { "rate": 0.04, "min": 26264 },
+          { "rate": 0.06, "min": 41452 }, { "rate": 0.08, "min": 57542 }, { "rate": 0.093, "min": 72724 },
+          { "rate": 0.103, "min": 371479 }, { "rate": 0.113, "min": 445771 }, { "rate": 0.123, "min": 742953 },
+          { "rate": 0.133, "min": 1000000 }
+        ],
+        "marriedJoint": [
+          { "rate": 0.01, "min": 0 }, { "rate": 0.02, "min": 22158 }, { "rate": 0.04, "min": 52528 },
+          { "rate": 0.06, "min": 82904 }, { "rate": 0.08, "min": 115084 }, { "rate": 0.093, "min": 145448 },
+          { "rate": 0.103, "min": 742958 }, { "rate": 0.113, "min": 891542 }, { "rate": 0.123, "min": 1000000 },
+          { "rate": 0.133, "min": 1485906 }
+        ]
+      },
+      "standardDeduction": { "single": 5540, "marriedJoint": 11080, "exemptionType": "deduction" },
+      "personalExemption": { "single": 153, "marriedJoint": 306, "dependent": 153, "exemptionType": "credit" },
+      "specialPayrollTax": [
+        { "id": "CA_SDI", "label": "CA State Disability Insurance (SDI)", "rate": 0.013, "wageCap": null, "verified": true }
+      ],
+      "notes": "Top bracket includes the 1% Mental Health Services Act surcharge on taxable income over $1,000,000."
+    },
+    "CO": { "name": "Colorado", "hasIncomeTax": true, "type": "flat", "flatRate": 0.044,
+      "standardDeduction": { "single": 16100, "marriedJoint": 32200, "exemptionType": "deduction" },
+      "specialPayrollTax": [
+        { "id": "CO_FAMLI", "label": "CO FAMLI (Paid Family & Medical Leave, employee share)", "rate": 0.0044, "wageCap": 184500, "verified": true }
+      ],
+      "notes": "Includes federal standard deduction in its income starting point."
+    },
+    "CT": { "name": "Connecticut", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [
+          { "rate": 0.02, "min": 0 }, { "rate": 0.045, "min": 10000 }, { "rate": 0.055, "min": 50000 },
+          { "rate": 0.06, "min": 100000 }, { "rate": 0.065, "min": 200000 }, { "rate": 0.069, "min": 250000 },
+          { "rate": 0.0699, "min": 500000 }
+        ],
+        "marriedJoint": [
+          { "rate": 0.02, "min": 0 }, { "rate": 0.045, "min": 20000 }, { "rate": 0.055, "min": 100000 },
+          { "rate": 0.06, "min": 200000 }, { "rate": 0.065, "min": 400000 }, { "rate": 0.069, "min": 500000 },
+          { "rate": 0.0699, "min": 1000000 }
+        ]
+      },
+      "standardDeduction": { "single": 0, "marriedJoint": 0, "exemptionType": "deduction" },
+      "personalExemption": { "single": 15000, "marriedJoint": 24000, "dependent": 0, "exemptionType": "deduction" },
+      "notes": "Personal exemption and low bracket phase out at higher incomes ('tax benefit recapture'); simplified here."
+    },
+    "DE": { "name": "Delaware", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [
+          { "rate": 0.022, "min": 2000 }, { "rate": 0.039, "min": 5000 }, { "rate": 0.048, "min": 10000 },
+          { "rate": 0.052, "min": 20000 }, { "rate": 0.0555, "min": 25000 }, { "rate": 0.066, "min": 60000 }
+        ],
+        "marriedJoint": [
+          { "rate": 0.022, "min": 2000 }, { "rate": 0.039, "min": 5000 }, { "rate": 0.048, "min": 10000 },
+          { "rate": 0.052, "min": 20000 }, { "rate": 0.0555, "min": 25000 }, { "rate": 0.066, "min": 60000 }
+        ]
+      },
+      "standardDeduction": { "single": 3250, "marriedJoint": 6500, "exemptionType": "deduction" },
+      "personalExemption": { "single": 110, "marriedJoint": 220, "dependent": 110, "exemptionType": "credit" }
+    },
+    "FL": { "name": "Florida", "hasIncomeTax": false, "type": "none" },
+    "GA": { "name": "Georgia", "hasIncomeTax": true, "type": "flat", "flatRate": 0.0519,
+      "standardDeduction": { "single": 12000, "marriedJoint": 24000, "exemptionType": "deduction" },
+      "personalExemption": { "dependent": 4000, "exemptionType": "deduction" }
+    },
+    "HI": { "name": "Hawaii", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [
+          { "rate": 0.014, "min": 0 }, { "rate": 0.032, "min": 9600 }, { "rate": 0.055, "min": 14400 },
+          { "rate": 0.064, "min": 19200 }, { "rate": 0.068, "min": 24000 }, { "rate": 0.072, "min": 36000 },
+          { "rate": 0.076, "min": 48000 }, { "rate": 0.079, "min": 125000 }, { "rate": 0.0825, "min": 175000 },
+          { "rate": 0.09, "min": 225000 }, { "rate": 0.10, "min": 275000 }, { "rate": 0.11, "min": 325000 }
+        ],
+        "marriedJoint": [
+          { "rate": 0.014, "min": 0 }, { "rate": 0.032, "min": 19200 }, { "rate": 0.055, "min": 28800 },
+          { "rate": 0.064, "min": 38400 }, { "rate": 0.068, "min": 48000 }, { "rate": 0.072, "min": 72000 },
+          { "rate": 0.076, "min": 96000 }, { "rate": 0.079, "min": 250000 }, { "rate": 0.0825, "min": 350000 },
+          { "rate": 0.09, "min": 450000 }, { "rate": 0.10, "min": 550000 }, { "rate": 0.11, "min": 650000 }
+        ]
+      },
+      "standardDeduction": { "single": 4400, "marriedJoint": 8800, "exemptionType": "deduction" },
+      "personalExemption": { "single": 1144, "marriedJoint": 2288, "dependent": 1144, "exemptionType": "deduction" },
+      "specialPayrollTax": [
+        { "id": "HI_TDI", "label": "HI Temporary Disability Insurance (employee share, capped weekly)", "rate": 0.005, "weeklyDollarCap": 6.00, "verified": false }
+      ]
+    },
+    "ID": { "name": "Idaho", "hasIncomeTax": true, "type": "flat", "flatRate": 0.053, "flatRateAppliesAbove": { "single": 4811, "marriedJoint": 9622 },
+      "standardDeduction": { "single": 16100, "marriedJoint": 32200, "exemptionType": "deduction" },
+      "notes": "Includes federal standard deduction in its income starting point."
+    },
+    "IL": { "name": "Illinois", "hasIncomeTax": true, "type": "flat", "flatRate": 0.0495,
+      "personalExemption": { "single": 2925, "marriedJoint": 5850, "dependent": 2925, "exemptionType": "deduction" }
+    },
+    "IN": { "name": "Indiana", "hasIncomeTax": true, "type": "flat", "flatRate": 0.0295,
+      "personalExemption": { "single": 1000, "marriedJoint": 2000, "dependent": 1000, "exemptionType": "deduction" }
+    },
+    "IA": { "name": "Iowa", "hasIncomeTax": true, "type": "flat", "flatRate": 0.038,
+      "standardDeduction": { "single": 16100, "marriedJoint": 32200, "exemptionType": "deduction" },
+      "personalExemption": { "single": 40, "marriedJoint": 80, "dependent": 40, "exemptionType": "credit" },
+      "notes": "Includes federal standard deduction in its income starting point."
+    },
+    "KS": { "name": "Kansas", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.052, "min": 0 }, { "rate": 0.0558, "min": 23000 }],
+        "marriedJoint": [{ "rate": 0.052, "min": 0 }, { "rate": 0.0558, "min": 46000 }]
+      },
+      "standardDeduction": { "single": 3605, "marriedJoint": 8240, "exemptionType": "deduction" },
+      "personalExemption": { "single": 9160, "marriedJoint": 18320, "dependent": 2320, "exemptionType": "deduction" }
+    },
+    "KY": { "name": "Kentucky", "hasIncomeTax": true, "type": "flat", "flatRate": 0.035,
+      "standardDeduction": { "single": 3360, "marriedJoint": 3360, "exemptionType": "deduction" },
+      "notes": "Standard deduction is not doubled for joint filers."
+    },
+    "LA": { "name": "Louisiana", "hasIncomeTax": true, "type": "flat", "flatRate": 0.03,
+      "standardDeduction": { "single": 12875, "marriedJoint": 25750, "exemptionType": "deduction" }
+    },
+    "ME": { "name": "Maine", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.058, "min": 0 }, { "rate": 0.0675, "min": 27399 }, { "rate": 0.0715, "min": 64849 }],
+        "marriedJoint": [{ "rate": 0.058, "min": 0 }, { "rate": 0.0675, "min": 54849 }, { "rate": 0.0715, "min": 129749 }]
+      },
+      "standardDeduction": { "single": 8350, "marriedJoint": 16700, "exemptionType": "deduction" },
+      "personalExemption": { "single": 5300, "marriedJoint": 10600, "dependent": 305, "exemptionType": "deduction" },
+      "notes": "State conforms to a pre-OBBBA standard deduction amount; dependent amount is a refundable credit."
+    },
+    "MD": { "name": "Maryland", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [
+          { "rate": 0.02, "min": 0 }, { "rate": 0.03, "min": 1000 }, { "rate": 0.04, "min": 2000 },
+          { "rate": 0.0475, "min": 3000 }, { "rate": 0.05, "min": 100000 }, { "rate": 0.0525, "min": 125000 },
+          { "rate": 0.055, "min": 150000 }, { "rate": 0.0575, "min": 250000 }, { "rate": 0.0625, "min": 500000 },
+          { "rate": 0.065, "min": 1000000 }
+        ],
+        "marriedJoint": [
+          { "rate": 0.02, "min": 0 }, { "rate": 0.03, "min": 1000 }, { "rate": 0.04, "min": 2000 },
+          { "rate": 0.0475, "min": 3000 }, { "rate": 0.05, "min": 150000 }, { "rate": 0.0525, "min": 175000 },
+          { "rate": 0.055, "min": 225000 }, { "rate": 0.0575, "min": 300000 }, { "rate": 0.0625, "min": 600000 },
+          { "rate": 0.065, "min": 1200000 }
+        ]
+      },
+      "standardDeduction": { "single": 3350, "marriedJoint": 6700, "exemptionType": "deduction" },
+      "personalExemption": { "single": 3200, "marriedJoint": 6400, "dependent": 3200, "exemptionType": "deduction" },
+      "notes": "Excludes county piggyback income tax (2.25%-3.2% depending on county) — out of scope for Phase 1."
+    },
+    "MA": { "name": "Massachusetts", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.05, "min": 0 }, { "rate": 0.09, "min": 1083150 }],
+        "marriedJoint": [{ "rate": 0.05, "min": 0 }, { "rate": 0.09, "min": 1083150 }]
+      },
+      "personalExemption": { "single": 4400, "marriedJoint": 8800, "dependent": 1000, "exemptionType": "deduction" },
+      "specialPayrollTax": [
+        { "id": "MA_PFML", "label": "MA Paid Family & Medical Leave (employee share)", "rate": 0.0046, "wageCap": 184500, "verified": true }
+      ],
+      "notes": "The 9% 'millionaire's tax' surtax threshold is not doubled for joint filers."
+    },
+    "MI": { "name": "Michigan", "hasIncomeTax": true, "type": "flat", "flatRate": 0.0425,
+      "personalExemption": { "single": 5900, "marriedJoint": 11800, "dependent": 5900, "exemptionType": "deduction" }
+    },
+    "MN": { "name": "Minnesota", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.0535, "min": 0 }, { "rate": 0.068, "min": 33310 }, { "rate": 0.0785, "min": 109430 }, { "rate": 0.0985, "min": 203150 }],
+        "marriedJoint": [{ "rate": 0.0535, "min": 0 }, { "rate": 0.068, "min": 48700 }, { "rate": 0.0785, "min": 193480 }, { "rate": 0.0985, "min": 337930 }]
+      },
+      "standardDeduction": { "single": 15300, "marriedJoint": 30600, "exemptionType": "deduction" },
+      "personalExemption": { "dependent": 5300, "exemptionType": "deduction" }
+    },
+    "MS": { "name": "Mississippi", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.04, "min": 10000 }],
+        "marriedJoint": [{ "rate": 0.04, "min": 10000 }]
+      },
+      "standardDeduction": { "single": 2300, "marriedJoint": 4600, "exemptionType": "deduction" },
+      "personalExemption": { "single": 6000, "marriedJoint": 12000, "dependent": 1500, "exemptionType": "deduction" }
+    },
+    "MO": { "name": "Missouri", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [
+          { "rate": 0.02, "min": 1348 }, { "rate": 0.025, "min": 2696 }, { "rate": 0.03, "min": 4044 },
+          { "rate": 0.035, "min": 5392 }, { "rate": 0.04, "min": 6740 }, { "rate": 0.045, "min": 8088 },
+          { "rate": 0.047, "min": 9436 }
+        ],
+        "marriedJoint": [
+          { "rate": 0.02, "min": 1348 }, { "rate": 0.025, "min": 2696 }, { "rate": 0.03, "min": 4044 },
+          { "rate": 0.035, "min": 5392 }, { "rate": 0.04, "min": 6740 }, { "rate": 0.045, "min": 8088 },
+          { "rate": 0.047, "min": 9436 }
+        ]
+      },
+      "standardDeduction": { "single": 16100, "marriedJoint": 32200, "exemptionType": "deduction" },
+      "notes": "Includes federal standard deduction in its income starting point. Missouri exempts capital gains income."
+    },
+    "MT": { "name": "Montana", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.047, "min": 0 }, { "rate": 0.0565, "min": 47500 }],
+        "marriedJoint": [{ "rate": 0.047, "min": 0 }, { "rate": 0.0565, "min": 95000 }]
+      },
+      "standardDeduction": { "single": 16100, "marriedJoint": 32200, "exemptionType": "deduction" },
+      "notes": "Includes federal standard deduction in its income starting point."
+    },
+    "NE": { "name": "Nebraska", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.0246, "min": 0 }, { "rate": 0.0351, "min": 4130 }, { "rate": 0.0455, "min": 24760 }],
+        "marriedJoint": [{ "rate": 0.0246, "min": 0 }, { "rate": 0.0351, "min": 8250 }, { "rate": 0.0455, "min": 49530 }]
+      },
+      "standardDeduction": { "single": 8850, "marriedJoint": 17700, "exemptionType": "deduction" },
+      "personalExemption": { "single": 176, "marriedJoint": 352, "dependent": 176, "exemptionType": "credit" }
+    },
+    "NV": { "name": "Nevada", "hasIncomeTax": false, "type": "none" },
+    "NH": { "name": "New Hampshire", "hasIncomeTax": false, "type": "none" },
+    "NJ": { "name": "New Jersey", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [
+          { "rate": 0.014, "min": 0 }, { "rate": 0.0175, "min": 20000 }, { "rate": 0.035, "min": 35000 },
+          { "rate": 0.0553, "min": 40000 }, { "rate": 0.0637, "min": 75000 }, { "rate": 0.0897, "min": 500000 },
+          { "rate": 0.1075, "min": 1000000 }
+        ],
+        "marriedJoint": [
+          { "rate": 0.014, "min": 0 }, { "rate": 0.0175, "min": 20000 }, { "rate": 0.0245, "min": 50000 },
+          { "rate": 0.035, "min": 70000 }, { "rate": 0.0553, "min": 80000 }, { "rate": 0.0637, "min": 150000 },
+          { "rate": 0.0897, "min": 500000 }, { "rate": 0.1075, "min": 1000000 }
+        ]
+      },
+      "personalExemption": { "single": 1000, "marriedJoint": 2000, "dependent": 1500, "exemptionType": "deduction" },
+      "specialPayrollTax": [
+        { "id": "NJ_TDI", "label": "NJ Temporary Disability Insurance (employee share)", "rate": 0.0019, "wageCap": 171100, "verified": true },
+        { "id": "NJ_FLI", "label": "NJ Family Leave Insurance (employee share)", "rate": 0.0023, "wageCap": 171100, "verified": true }
+      ]
+    },
+    "NM": { "name": "New Mexico", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [
+          { "rate": 0.015, "min": 0 }, { "rate": 0.032, "min": 5500 }, { "rate": 0.043, "min": 16500 },
+          { "rate": 0.047, "min": 33500 }, { "rate": 0.049, "min": 66500 }, { "rate": 0.059, "min": 210000 }
+        ],
+        "marriedJoint": [
+          { "rate": 0.015, "min": 0 }, { "rate": 0.032, "min": 8000 }, { "rate": 0.043, "min": 25000 },
+          { "rate": 0.047, "min": 50000 }, { "rate": 0.049, "min": 100000 }, { "rate": 0.059, "min": 315000 }
+        ]
+      },
+      "standardDeduction": { "single": 16100, "marriedJoint": 32200, "exemptionType": "deduction" },
+      "personalExemption": { "dependent": 4000, "exemptionType": "deduction" },
+      "notes": "Includes federal standard deduction in its income starting point; $4,000 dependent deduction in lieu of suspended personal exemption."
+    },
+    "NY": { "name": "New York", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [
+          { "rate": 0.039, "min": 0 }, { "rate": 0.044, "min": 8500 }, { "rate": 0.0515, "min": 11700 },
+          { "rate": 0.054, "min": 13900 }, { "rate": 0.059, "min": 80650 }, { "rate": 0.0685, "min": 215400 },
+          { "rate": 0.0965, "min": 1077550 }, { "rate": 0.103, "min": 5000000 }, { "rate": 0.109, "min": 25000000 }
+        ],
+        "marriedJoint": [
+          { "rate": 0.039, "min": 0 }, { "rate": 0.044, "min": 17150 }, { "rate": 0.0515, "min": 23600 },
+          { "rate": 0.054, "min": 27900 }, { "rate": 0.059, "min": 161550 }, { "rate": 0.0685, "min": 323200 },
+          { "rate": 0.0965, "min": 2155350 }, { "rate": 0.103, "min": 5000000 }, { "rate": 0.109, "min": 25000000 }
+        ]
+      },
+      "standardDeduction": { "single": 8000, "marriedJoint": 16050, "exemptionType": "deduction" },
+      "personalExemption": { "dependent": 1000, "exemptionType": "deduction" },
+      "specialPayrollTax": [
+        { "id": "NY_PFL", "label": "NY Paid Family Leave (employee share, capped annually)", "rate": 0.00432, "annualDollarCap": 411.91, "verified": true }
+      ],
+      "notes": "Excludes NYC and Yonkers local income taxes — out of scope for Phase 1. High earners face 'tax benefit recapture' (top rate applies to all income above the benefit threshold), simplified here."
+    },
+    "NC": { "name": "North Carolina", "hasIncomeTax": true, "type": "flat", "flatRate": 0.0399,
+      "standardDeduction": { "single": 12750, "marriedJoint": 25500, "exemptionType": "deduction" }
+    },
+    "ND": { "name": "North Dakota", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.0195, "min": 48475 }, { "rate": 0.025, "min": 244825 }],
+        "marriedJoint": [{ "rate": 0.0195, "min": 80975 }, { "rate": 0.025, "min": 298075 }]
+      },
+      "standardDeduction": { "single": 16100, "marriedJoint": 32200, "exemptionType": "deduction" },
+      "notes": "Effectively 0% below the first bracket threshold; includes federal standard deduction in its income starting point."
+    },
+    "OH": { "name": "Ohio", "hasIncomeTax": true, "type": "flat", "flatRate": 0.0275, "flatRateAppliesAbove": { "single": 26050, "marriedJoint": 26050 },
+      "personalExemption": { "single": 2400, "marriedJoint": 4800, "dependent": 2400, "exemptionType": "deduction" },
+      "notes": "Transitioned to a single flat rate on nonbusiness income above $26,050 as of Jan 1, 2026; exemption phases down/out above $80k-$500k MAGI."
+    },
+    "OK": { "name": "Oklahoma", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.025, "min": 3750 }, { "rate": 0.035, "min": 4900 }, { "rate": 0.045, "min": 7200 }],
+        "marriedJoint": [{ "rate": 0.025, "min": 7500 }, { "rate": 0.035, "min": 9800 }, { "rate": 0.045, "min": 14400 }]
+      },
+      "standardDeduction": { "single": 6350, "marriedJoint": 12700, "exemptionType": "deduction" },
+      "personalExemption": { "single": 1000, "marriedJoint": 2000, "dependent": 1000, "exemptionType": "deduction" },
+      "notes": "Brackets consolidated from six to three effective Jan 1, 2026; not indexed for inflation."
+    },
+    "OR": { "name": "Oregon", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.0475, "min": 0 }, { "rate": 0.0675, "min": 4550 }, { "rate": 0.0875, "min": 11400 }, { "rate": 0.099, "min": 125000 }],
+        "marriedJoint": [{ "rate": 0.0475, "min": 0 }, { "rate": 0.0675, "min": 9100 }, { "rate": 0.0875, "min": 22800 }, { "rate": 0.099, "min": 250000 }]
+      },
+      "personalExemption": { "single": 256, "marriedJoint": 512, "dependent": 256, "exemptionType": "credit" },
+      "notes": "Standard deduction structured as a credit (~$2,910/$5,820 filer credit)."
+    },
+    "PA": { "name": "Pennsylvania", "hasIncomeTax": true, "type": "flat", "flatRate": 0.0307 },
+    "RI": { "name": "Rhode Island", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.0375, "min": 0 }, { "rate": 0.0475, "min": 82050 }, { "rate": 0.0599, "min": 186450 }],
+        "marriedJoint": [{ "rate": 0.0375, "min": 0 }, { "rate": 0.0475, "min": 82050 }, { "rate": 0.0599, "min": 186450 }]
+      },
+      "standardDeduction": { "single": 11200, "marriedJoint": 22400, "exemptionType": "deduction" },
+      "personalExemption": { "single": 5250, "marriedJoint": 10500, "dependent": 5250, "exemptionType": "deduction" },
+      "notes": "RI Temporary Disability Insurance (employee-funded) applies; 2026 rate/wage-base not yet confirmed at publication — omitted from specialPayrollTax pending official notice."
+    },
+    "SC": { "name": "South Carolina", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.0, "min": 0 }, { "rate": 0.03, "min": 3640 }, { "rate": 0.06, "min": 18230 }],
+        "marriedJoint": [{ "rate": 0.0, "min": 0 }, { "rate": 0.03, "min": 3640 }, { "rate": 0.06, "min": 18230 }]
+      },
+      "standardDeduction": { "single": 8350, "marriedJoint": 16700, "exemptionType": "deduction" },
+      "personalExemption": { "dependent": 4930, "exemptionType": "deduction" },
+      "notes": "Top rate is temporarily 6% through June 30, 2026 and is scheduled to revert to 6.2% on July 1, 2026."
+    },
+    "SD": { "name": "South Dakota", "hasIncomeTax": false, "type": "none" },
+    "TN": { "name": "Tennessee", "hasIncomeTax": false, "type": "none" },
+    "TX": { "name": "Texas", "hasIncomeTax": false, "type": "none" },
+    "UT": { "name": "Utah", "hasIncomeTax": true, "type": "flat", "flatRate": 0.045,
+      "personalExemption": { "single": 966, "marriedJoint": 1932, "dependent": 2111, "exemptionType": "credit" },
+      "notes": "Standard-deduction credit is 6% of the federal standard/itemized deduction, phasing out at higher incomes."
+    },
+    "VT": { "name": "Vermont", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.0335, "min": 0 }, { "rate": 0.066, "min": 49400 }, { "rate": 0.076, "min": 119700 }, { "rate": 0.0875, "min": 249700 }],
+        "marriedJoint": [{ "rate": 0.0335, "min": 0 }, { "rate": 0.066, "min": 82500 }, { "rate": 0.076, "min": 199450 }, { "rate": 0.0875, "min": 304000 }]
+      },
+      "standardDeduction": { "single": 7650, "marriedJoint": 15300, "exemptionType": "deduction" },
+      "personalExemption": { "single": 5300, "marriedJoint": 10600, "dependent": 5300, "exemptionType": "deduction" }
+    },
+    "VA": { "name": "Virginia", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.02, "min": 0 }, { "rate": 0.03, "min": 3000 }, { "rate": 0.05, "min": 5000 }, { "rate": 0.0575, "min": 17000 }],
+        "marriedJoint": [{ "rate": 0.02, "min": 0 }, { "rate": 0.03, "min": 3000 }, { "rate": 0.05, "min": 5000 }, { "rate": 0.0575, "min": 17000 }]
+      },
+      "standardDeduction": { "single": 8750, "marriedJoint": 17500, "exemptionType": "deduction" },
+      "personalExemption": { "single": 930, "marriedJoint": 1860, "dependent": 930, "exemptionType": "deduction" }
+    },
+    "WA": { "name": "Washington", "hasIncomeTax": false, "type": "none",
+      "specialPayrollTax": [
+        { "id": "WA_CARES", "label": "WA Cares Fund (long-term care, employee-funded)", "rate": 0.0058, "wageCap": null, "verified": true }
+      ],
+      "notes": "No tax on wage/salary income. A capital-gains-only tax (7%/9%) applies above $270k+ thresholds but is out of scope for a wage paycheck calculator. WA Paid Family & Medical Leave premium also applies but the 2026 employee/employer split was not separately confirmed for this dataset."
+    },
+    "WV": { "name": "West Virginia", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [
+          { "rate": 0.0222, "min": 0 }, { "rate": 0.0296, "min": 10000 }, { "rate": 0.0333, "min": 25000 },
+          { "rate": 0.0444, "min": 40000 }, { "rate": 0.0482, "min": 60000 }
+        ],
+        "marriedJoint": [
+          { "rate": 0.0222, "min": 0 }, { "rate": 0.0296, "min": 10000 }, { "rate": 0.0333, "min": 25000 },
+          { "rate": 0.0444, "min": 40000 }, { "rate": 0.0482, "min": 60000 }
+        ]
+      },
+      "personalExemption": { "single": 2000, "marriedJoint": 4000, "dependent": 2000, "exemptionType": "deduction" }
+    },
+    "WI": { "name": "Wisconsin", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [{ "rate": 0.035, "min": 0 }, { "rate": 0.044, "min": 15110 }, { "rate": 0.053, "min": 51950 }, { "rate": 0.0765, "min": 332720 }],
+        "marriedJoint": [{ "rate": 0.035, "min": 0 }, { "rate": 0.044, "min": 20150 }, { "rate": 0.053, "min": 69260 }, { "rate": 0.0765, "min": 443630 }]
+      },
+      "standardDeduction": { "single": 13960, "marriedJoint": 25840, "exemptionType": "deduction" },
+      "personalExemption": { "single": 700, "marriedJoint": 1400, "dependent": 700, "exemptionType": "deduction" },
+      "notes": "Standard deduction phases out between roughly $20K-$136K (single) / $29K-$160K (joint)."
+    },
+    "WY": { "name": "Wyoming", "hasIncomeTax": false, "type": "none" },
+    "DC": { "name": "Washington, D.C.", "hasIncomeTax": true, "type": "graduated", "hohUsesSingleBrackets": true,
+      "brackets": {
+        "single": [
+          { "rate": 0.04, "min": 0 }, { "rate": 0.06, "min": 10000 }, { "rate": 0.065, "min": 40000 },
+          { "rate": 0.085, "min": 60000 }, { "rate": 0.0925, "min": 250000 }, { "rate": 0.0975, "min": 500000 },
+          { "rate": 0.1075, "min": 1000000 }
+        ],
+        "marriedJoint": [
+          { "rate": 0.04, "min": 0 }, { "rate": 0.06, "min": 10000 }, { "rate": 0.065, "min": 40000 },
+          { "rate": 0.085, "min": 60000 }, { "rate": 0.0925, "min": 250000 }, { "rate": 0.0975, "min": 500000 },
+          { "rate": 0.1075, "min": 1000000 }
+        ]
+      },
+      "standardDeduction": { "single": 16100, "marriedJoint": 32200, "exemptionType": "deduction" }
+    }
+  }
+}
