@@ -38,7 +38,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   verification: {
-    google: "1ddA7QWRzhtNYKopCS3PCi8MLdN2ubA3JLM8ZFfX8Yk",
+    <meta name="google-site-verification" content="googlea2cefaf54c271783"/>
+<meta name="google-site-verification" content="1ddA7QWRzhtNYKopCS3PCi8MLdN2ubA3JLM8ZFfX8Yk"/>
   },
 };
 
